@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://qingyandream.github.io</id>
+    <title>QingYan</title>
+    <updated>2024-04-14T09:19:23.368Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://qingyandream.github.io"/>
+    <link rel="self" href="https://qingyandream.github.io/atom.xml"/>
+    <subtitle>温故而知新</subtitle>
+    <logo>https://qingyandream.github.io/images/avatar.png</logo>
+    <icon>https://qingyandream.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2024, QingYan</rights>
+    <entry>
+        <title type="html"><![CDATA[RabbitMQ的高可用机制]]></title>
+        <id>https://qingyandream.github.io/post/rabbitmq-de-gao-ke-yong-ji-zhi/</id>
+        <link href="https://qingyandream.github.io/post/rabbitmq-de-gao-ke-yong-ji-zhi/">
+        </link>
+        <updated>2024-04-14T08:58:57.000Z</updated>
+        <content type="html"><![CDATA[<p>在生产环境下，使用集群来保证高可用性<br>
+有普通集群、镜像集群、仲裁队列</p>
+<h4 id="普通集群">普通集群</h4>
+<p>普通集群又叫标准集群，有以下特征：</p>
+<ul>
+<li>会在集群的各个节点间共享部分数据，包括：交换机、队列元信息。不包含队列中的消息。</li>
+<li>当访问集群某节点时，如果队列不在该节点，会从数据所在节点传递到当前节点并返回</li>
+<li>队列所在节点宕机，队列中的消息就会丢失（缺点）<br>
+<img src="https://qingyandream.github.io/post-images/1713085148141.png" alt="" loading="lazy"><br>
+这个交换机在每个集群当中，但是每个节点上的队列是不一样的。<br>
+消费者想要去消费 queue1中的消息，但是找的是第三个集群，第三个集群对 queue1进行了引用，所以会去传递到 queue1中去消费消息。</li>
+</ul>
+<h4 id="镜像集群">镜像集群</h4>
+<p>镜像集群：本质是主从模式，具备下面的特征：</p>
+<ul>
+<li>交换机、队列、队列中的消息会在各个 mq 的镜像节点之间同步备份。</li>
+<li>创建队列的节点被称为该队列的主节点，备份到的其它节点叫做该队列的镜像节点。</li>
+<li>一个队列的主节点可能是另一个队列的镜像节点</li>
+<li>所有操作都是主节点完成，然后同步给镜像节点</li>
+<li>主节点宕机后，镜像节点会替代成新的主节点<br>
+如果主节点宕机，数据没有同步完成，就有可能丢失数据。（少见）</li>
+</ul>
+<h4 id="仲裁队列">仲裁队列</h4>
+<p>用来替代镜像队列，具备以下特征：</p>
+<ul>
+<li>与镜像队列一样，都是主从模式，支持主从数据同步</li>
+<li>使用非常简单，没有复杂的配置</li>
+<li>主从同步基于 Raft 协议，强一致<br>
+开启方法如下：</li>
+</ul>
+<pre><code class="language-java">  // 使用@Bean注解定义一个Queue的Bean，Spring会自动将其注册到应用上下文中
+    @Bean
+    public Queue quorum() {
+        // 使用QueueBuilder创建一个队列构建器
+        // nonDurable(&quot;test.quorum&quot;)指定队列名称为&quot;test.quorum&quot;，并且是非持久化的
+        return QueueBuilder.nonDurable(&quot;test.quorum&quot;)
+                // quorum()方法指定这个队列是一个Quorum队列
+                .quorum()
+                // exclusive()方法指定这个队列是独占的，仅对声明它的连接可见
+                .exclusive()
+                // build()方法完成队列构建
+                .build();
+    }
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[消息堆积]]></title>
+        <id>https://qingyandream.github.io/post/xiao-xi-dui-ji/</id>
+        <link href="https://qingyandream.github.io/post/xiao-xi-dui-ji/">
+        </link>
+        <updated>2024-04-14T06:53:08.000Z</updated>
+        <content type="html"><![CDATA[<p>当生产者发送消息的速度超过了消费者处理消息的速度，就会导致队列中的消息堆积，直至队列储存消息达到上限。之后发送的消息就会称为死信，可能会被丢弃，这就是消息堆积问题。<br>
+解决方法：</p>
+<ul>
+<li>增加更多消费者，提高消费速度</li>
+<li>在消费者内开启线程池加快消息处理速度</li>
+<li>扩大队列容积，提高堆积上限，采用惰性队列</li>
+</ul>
+<h4 id="惰性队列">惰性队列</h4>
+<p>惰性队列特征如下：</p>
+<ul>
+<li>接到消息后直接存入磁盘而非内存</li>
+<li>消费者要消费消息时才会从磁盘中读取并加载到内存</li>
+<li>支持数百万条的消息储存<br>
+下面是通过配置来开启惰性队列：</li>
+</ul>
+<pre><code class="language-java">// 使用Spring AMQP的QueueBuilder来声明一个惰性队列
+@Bean
+public Queue lazyQueue(){
+    // 创建一个持久化、名为&quot;lazy.queue&quot;的队列，并设置为惰性模式
+    return QueueBuilder.durable(&quot;lazy.queue&quot;)
+            .lazy() // 开启惰性模式
+            .build();
+}
+
+// 声明一个直连交换机，用于惰性队列消息的转发
+@Bean
+public DirectExchange lazyDirectExchange(){
+    // 创建一个名为&quot;lazy.exchange&quot;的直连交换机
+    return new DirectExchange(&quot;lazy.exchange&quot;);
+}
+
+// 将惰性队列和惰性交换机绑定，并指定路由键
+@Bean
+public Binding lazyBinding(Queue lazyQueue, DirectExchange lazyDirectExchange){
+    // 使用BindingBuilder将名为&quot;lazy.queue&quot;的队列绑定到名为&quot;lazy.exchange&quot;的交换机
+    // 并使用&quot;lazy&quot;作为路由键
+    return BindingBuilder.bind(lazyQueue).to(lazyDirectExchange).with(&quot;lazy&quot;);
+}
+
+</code></pre>
+<p>下面是注解方式，设置属性 x-queue-mode 为lazy：</p>
+<pre><code class="language-java">    // 使用@RabbitListener注解声明一个惰性队列、交换机和绑定
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(name = &quot;lazy.queue&quot;, durable = &quot;true&quot;, arguments = @Argument(name = &quot;x-queue-mode&quot;, value = &quot;lazy&quot;)),
+            exchange = @Exchange(name = &quot;lazy.exchange&quot;, type = ExchangeTypes.DIRECT),
+            key = &quot;lazy.routing.key&quot;
+    ))
+      public void receiveMessage(String message) {
+        // 处理接收到的消息
+    }
+</code></pre>
+<p>优点：基于磁盘储存，消息上限高，性能比较稳定。<br>
+缺点：受限于磁盘 IO，时效性会降低。（在数据处理过程中，由于磁盘输入/输出（IO）操作的效率限制，导致数据处理的时效性下降。这里的&quot;时效性&quot;指的是完成任务或处理数据所需的时间。）</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[RabbitMQ中死信交换机]]></title>
+        <id>https://qingyandream.github.io/post/rabbitmq-zhong-si-xin-jiao-huan-ji/</id>
+        <link href="https://qingyandream.github.io/post/rabbitmq-zhong-si-xin-jiao-huan-ji/">
+        </link>
+        <updated>2024-04-14T02:55:18.000Z</updated>
+        <content type="html"><![CDATA[<p>当一个队列中的消息满足下列情况之一时，可以成为死信：</p>
+<ul>
+<li>消费者使用 basic（/ ˈbeɪ.sɪk /）. reject （ /rɪˈdʒekt/）或 basic. nack 声明消费失败，并且消息的 requeue 参数为 false</li>
+<li>消息是一个过期消息，超时无人消费</li>
+<li>要投递的队列消息堆积满了，最早的消息可能成为死信<br>
+如果该队列配置了 dead-letter-exchange 属性，指定了一个交换机，那么队列中的死信就会投递到这个交换机中，而这个交换机称为死信交换机。<br>
+<img src="https://qingyandream.github.io/post-images/1713063648750.png" alt="" loading="lazy"><br>
+要对下面进行配置<br>
+dead-letter-exchange=dl. direct<br>
+dead-letter-routing-key=dl</li>
+</ul>
+<pre><code class="language-java">@Bean
+public Queue simpleQueue2(){
+    return QueueBuilder.durable(&quot;xxxx.queue&quot;) // 指定队列名称，并持久化
+        .deadLetterExchange(&quot;dl.direct&quot;) // 指定死信交换机
+        .build();
+}
+</code></pre>
+<h4 id="ttl">TTL</h4>
+<p>TTL: Time-To-Live（存活时间）, 如果一个队列中的消息 TTL 结束仍未消费，则会变为死信，ttl 超时分为两种情况：</p>
+<ul>
+<li>消息所在的队列设置了存活时间</li>
+<li>消息本身设置了存活时间<br>
+<img src="https://qingyandream.github.io/post-images/1713063685453.png" alt="" loading="lazy"></li>
+</ul>
+<pre><code class="language-java">@Bean
+public Queue ttlQueue(){
+    return QueueBuilder.durable(&quot;ttl.queue&quot;) // 指定队列名称，并持久化
+        .ttl(5000) // 设置队列的超时时间，5秒
+        .deadLetterExchange(&quot;dl.direct&quot;) // 指定死信交换机
+        .build();
+}
+
+</code></pre>
+<h4 id="延迟队列">延迟队列</h4>
+<p>延迟队列=死信交换机+TTL<br>
+使用延迟队列要安装一个 DelayExchange 插件，需要安装在 RabbitMQ 中。<br>
+DelayExchange 的本质还是官方的三种交换机，只是添加了延迟功能。所以在使用的时候只需要声明一个交换机，交换机的类型可以是任意类型，然后设定 delayed 属性为 true 即可。<br>
+首先去声明一个交换机，通过@RabbitListener 注解绑定交换机并且设定 delayed 属性为 true 即可。</p>
+<pre><code class="language-java">@RabbitListener(bindings = @QueueBinding(value = @Queue(name = &quot;queue_delay&quot;),
+            exchange = @Exchange(name = &quot;exchange_delay&quot;, delayed = &quot;true&quot;), key = &quot;routing_delay&quot;))
+
+</code></pre>
+<p>发送消息：</p>
+<pre><code class="language-java">Message message = MessageBuilder.withBody(msg.getBytes(StandardCharsets.UTF_8)).setHeader(&quot;x-delay&quot;, 5000).build();
+</code></pre>
+<p>通过配置的方式来实现：</p>
+<pre><code class="language-java">
+@Configuration
+public class RabbitMQConfig {
+
+    // 声明延迟队列
+    @Bean
+    public Queue delayQueue() {
+        // 创建一个持久化的队列，队列名称为 &quot;delay.queue&quot;，并且设置为持久化队列
+        return new Queue(&quot;delay.queue&quot;, true);
+    }
+
+    // 声明延迟交换机
+    @Bean
+    public CustomExchange delayExchange() {
+        // 创建一个自定义的延迟交换机，交换机名称为 &quot;delay.exchange&quot;，类型为 &quot;x-delayed-message&quot;
+        // 并且设置为持久化交换机，非自动删除，以及自定义的参数
+        Map&lt;String, Object&gt; args = new HashMap&lt;&gt;();
+        args.put(&quot;x-delayed-type&quot;, &quot;direct&quot;); // 设置延迟消息的类型为 direct
+        // 创建一个自定义的延迟交换机
+		// 参数说明：
+		// name: 交换机的名称，这里设置为 &quot;delay.exchange&quot;
+		// type: 交换机的类型，这里设置为 &quot;x-delayed-message&quot;，表示这是一个延迟交换机
+		// durable: 设置为 true，表示交换机是持久化的，即使RabbitMQ重启，交换机也会保留
+		// autoDelete: 设置为 false，表示交换机不会在没有队列绑定时自动删除
+		// arguments: 一个包含额外参数的Map，用于配置交换机的行为
+		// 这里设置了 &quot;x-delayed-type&quot; 参数，其值为 &quot;direct&quot;，表示消息将根据路由键直接路由到队列
+        return new CustomExchange(&quot;delay.exchange&quot;, &quot;x-delayed-message&quot;, true, false, args);
+    }
+
+    // 声明延迟队列和延迟交换机的绑定
+    @Bean
+    public Binding delayBinding(Queue delayQueue, CustomExchange delayExchange) {
+        // 创建一个绑定，将延迟队列和延迟交换机绑定在一起
+        // 使用 &quot;delay.routing.key&quot; 作为路由键
+        return BindingBuilder.bind(delayQueue).to(delayExchange).with(&quot;delay.routing.key&quot;).noargs();
+    }
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[RabbitMQ消息的重复消费]]></title>
+        <id>https://qingyandream.github.io/post/rabbitmq-xiao-xi-de-chong-fu-xiao-fei/</id>
+        <link href="https://qingyandream.github.io/post/rabbitmq-xiao-xi-de-chong-fu-xiao-fei/">
+        </link>
+        <updated>2024-04-13T14:10:36.000Z</updated>
+        <content type="html"><![CDATA[<p>造成重复消费问题大约有以下原因：</p>
+<ul>
+<li>网络抖动</li>
+<li>服务宕机<br>
+解决方法：</li>
+<li>每条消息设置一个唯一的标识 id</li>
+<li>幂等方案：分布式锁、数据库锁（悲观锁、乐观锁）</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[RabbitMQ如何保证消息不丢失]]></title>
+        <id>https://qingyandream.github.io/post/rabbitmq-ru-he-bao-zheng-xiao-xi-bu-diu-shi/</id>
+        <link href="https://qingyandream.github.io/post/rabbitmq-ru-he-bao-zheng-xiao-xi-bu-diu-shi/">
+        </link>
+        <updated>2024-04-12T11:56:51.000Z</updated>
+        <content type="html"><![CDATA[<p>消息丢失的情况大约有三种：</p>
+<ul>
+<li>消息未达到交换机</li>
+<li>消息未达到队列</li>
+<li>消费者未接收到消息<br>
+<img src="https://qingyandream.github.io/post-images/1712923082942.png" alt="" loading="lazy"></li>
+</ul>
+<h4 id="生产者确认机制">生产者确认机制</h4>
+<p>RabbitMQ 提供了 publisher confirm 机制来避免消息发送到 MQ 过程中丢失。<br>
+消息发送到 MQ 以后，会返回一个结果给发送者，表示消息处理成功。</p>
+<ul>
+<li>消息未达到交换机，会返回一个 nack publish-confirm</li>
+<li>消息未达到队列，返回一个 ack publish-return</li>
+<li>消费者未接收到消息，ask public-confirm</li>
+</ul>
+<h5 id="处理方法">处理方法：</h5>
+<ul>
+<li>回调方法即时重发</li>
+<li>记录日志</li>
+<li>保存到数据库，然后定时重发，成功发送后立即删除表中数据</li>
+</ul>
+<h4 id="mq-宕机了怎么办">MQ 宕机了怎么办？</h4>
+<p>开启持久化功能可以确保缓存在 MQ 中的消息不丢失<br>
+解决方法：</p>
+<ul>
+<li>交换机持久化</li>
+<li>队列持久化</li>
+<li>消息持久化<br>
+交换机持久化：</li>
+</ul>
+<pre><code class="language-java"> @Bean
+    public DirectExchange directExchange() {
+        // 第二个参数设置为true，表示交换机是持久化的
+        return new DirectExchange(&quot;directExchange&quot;, true, false);
+    }
+</code></pre>
+<p>队列持久化：</p>
+<pre><code class="language-java">
+    @Bean
+    public Queue queue() {
+        // 第二个参数设置为true，表示队列是持久化的
+        return new Queue(&quot;persistent_queue&quot;, true);
+    }
+</code></pre>
+<p>消息持久化</p>
+<pre><code class="language-java">  // 创建一个MessageProperties对象，并设置消息的持久化属性
+         MessageProperties messageProperties = new MessageProperties();
+         messageProperties.setDeliveryMode(MessageDeliveryMode.PERSISTENT );
+         // 创建一个Message对象，并设置消息的内容和持久化属性
+         Message persistentMessage = new Message(message.getBytes(), messageProperties);
+         // 使用RabbitTemplate发送持久化消息
+         rabbitTemplate.convertAndSend(&quot;exchangeName&quot;, &quot;routingKey&quot;, persistentMessage);
+</code></pre>
+<h4 id="消费者消息丢失消费者未接收到消息">消费者消息丢失（消费者未接收到消息）</h4>
+<p>RabbitMQ 支持消费者确认机制。<br>
+消费者处理消息后可以向 MQ 发送 ack 回执，MQ 收到 ack 回执后才会删除该消息。<br>
+三种模式：</p>
+<ul>
+<li>manual：手动 ack，需要在业务代码结束后，调用 api 发送 ack</li>
+<li>auto：自动 ack，由 spring 监测 listener 代码是否出现异常（一般使用这种）</li>
+<li>none：关闭 ack，MQ 假定消费者获取消息后成功处理，因此消息投递后立即删除<br>
+使用 Spring 中的 retry 机制，在消费者出现异常时利用本地重试次数，当次数达到了以后，如果消息依然失败，将消息投递到异常交换机，交由人工处理。</li>
+</ul>
+<h4 id="总结">总结</h4>
+<ul>
+<li>开启生产者确认机制</li>
+<li>开启持久化功能</li>
+<li>开启消费者确认机制为 auto</li>
+<li>开启消费者失败重试机制</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[什么是单例？]]></title>
+        <id>https://qingyandream.github.io/post/shi-me-shi-dan-li/</id>
+        <link href="https://qingyandream.github.io/post/shi-me-shi-dan-li/">
+        </link>
+        <updated>2024-04-09T00:21:23.000Z</updated>
+        <content type="html"><![CDATA[<p>在 Java 中，单例（Singleton）是一种设计模式，它确保类只有一个实例，并提供一个全局访问点。<br>
+实现关键：</p>
+<ul>
+<li>私有构造方法：其他类无法直接实例化该类。</li>
+<li>私有静态变量：保存该类的唯一实例。</li>
+<li>公有静态方法：获取该类的唯一实例。<br>
+下面是一个简单的懒汉单例模式，代码如下：</li>
+</ul>
+<pre><code class="language-java">public class Singleton {
+    // 私有静态变量，保存唯一实例
+    private static Singleton instance;
+    // 私有构造方法，防止外部直接实例化
+    private Singleton() {}
+    // 公有静态方法，获取唯一实例
+    public static Singleton getInstance() {
+        // 如果实例不存在，则创建一个新实例
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        // 返回唯一实例
+        return instance;
+    }
+}
+
+</code></pre>
+<p>使用 Singleton.getInstance()可以进行调用，懒汉式单例模式，在多线程环境下，可能会存在线程安全问题，下面提供一个解决方法（私有静态类）：</p>
+<pre><code class="language-java">public class Singleton {
+    private Singleton() {}
+    private static class SingletonHolder {
+        private static final Singleton instance = new Singleton();
+    }
+    public static Singleton getInstance() {
+        return SingletonHolder.instance;
+    }
+}
+
+</code></pre>
+<p>私有的静态内部类 SingletonHolder 持有唯一的实例，并在静态初始化阶段完成实例化。由于静态内部类只有在被引用时才会加载，因此可以延迟实例的创建，从而实现懒汉式的单例。<br>
+饿汉模式（Eager Initialization）是一种单例模式的实现方式，在类加载的时候就创建并初始化单例对象，保证在多线程环境下也能保持单例的唯一性。<br>
+例子如下：</p>
+<pre><code class="language-java">public class Singleton {
+    // 在类加载的时候就创建并初始化单例对象
+    private static final Singleton INSTANCE = new Singleton();
+    // 私有构造方法，防止外部实例化
+    private Singleton() {
+    }
+    // 公有静态方法，供外部获取单例对象
+    public static Singleton getInstance() {
+        return INSTANCE;
+    }
+}
+
+</code></pre>
+<p>Singleton类的静态成员变量INSTANCE在类加载的时候就会被创建并初始化，因此可以保证在整个程序运行期间只存在一个Singleton对象。<br>
+另外，枚举类型的实例是唯一的，而且在任何情况下都是线程安全的。使用枚举来实现单例模式是最简洁、安全的方式。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[ LeetCode 485. 最大连续 1 的个数]]></title>
+        <id>https://qingyandream.github.io/post/algorithm-java-01/</id>
+        <link href="https://qingyandream.github.io/post/algorithm-java-01/">
+        </link>
+        <updated>2024-03-27T12:30:53.000Z</updated>
+        <content type="html"><![CDATA[<p>给定一个二进制数组 nums ， 计算其中最大连续 1 的个数。</p>
+<pre><code class="language-text">示例 1：
+
+输入：nums = [1,1,0,1,1,1]
+输出：3
+解释：开头的两位和最后的三位都是连续 1 ，所以最大连续 1 的个数是 3.
+示例 2:
+
+输入：nums = [1,0,1,1,0,1]
+输出：2
+</code></pre>
+<p>根据题目可以知道，我们要求的是最大连续 1 的个数，所以要对数组进行遍历，我们定义两个参数用来记录连续个数，为什么要设置两个呢？因为，当我们遍历数组，我们是不是要把之前的连续是1的个数记录下来？是的，我们可以用temp用来记录之前连续1的个数，当我们遍历到0的时候我们做一个比较，比较一下temp和coiled二者谁比较大 ，把大的值赋给coiled，在把temp重置为0；最后返回的也要做一个比较，防止数组末尾是1。</p>
+<p>解题代码如下：</p>
+<pre><code class="language-java">class Solution {
+    public int findMaxConsecutiveOnes(int[] nums) {
+    int coiled=0;
+    int temp=0;
+    for(int x:nums){
+        if(x==1){
+            temp++;
+        }
+        if(x==0){
+           coiled=Math.max(temp,coiled);
+           temp=0;
+        }
+    }
+    //确保最后一次遍历正确
+    return Math.max(coiled,temp);
+    }
+}
+</code></pre>
+]]></content>
+    </entry>
+</feed>

@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="keywords" content="清烟">
+<meta name="description" content="温故而知新">
+<meta name="theme-color" content="#000">
+<title>QingYan</title>
+<link rel="shortcut icon" href="/favicon.ico?v=1713085195901">
+<link rel="stylesheet" href="/media/css/pisces.css">
+<link rel="stylesheet" href="/media/fonts/font-awesome.css">
+<link
+  href="//fonts.loli.net/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+  rel="stylesheet" type="text/css">
+
+<link href="/media/hljs/styles/default.css"
+  rel="stylesheet">
+
+<link rel="stylesheet" href="/styles/main.css">
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script src="/media/js/jquery.js"></script>
+<script src="/media/hljs/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+  integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+  integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
+  integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+  onload="renderMathInElement(document.body);"></script>
+
+
+
+
+
+
+</head>
+
+<body>
+  <div class="head-top-line"></div>
+  <div class="header-box">
+    
+<div class="pisces">
+  <header class="header  ">
+    <div class="blog-header box-shadow-wrapper bg-color " id="header">
+      <div class="nav-toggle" id="nav_toggle">
+        <div class="toggle-box">
+          <div class="line line-top"></div>
+          <div class="line line-center"></div>
+          <div class="line line-bottom"></div>
+        </div>
+      </div>
+      <div class="site-meta">       
+        <div class="site-title">
+          
+            <a href="/" class="brand">
+              <span>QingYan</span>
+            </a>  
+          
+        </div>
+        
+          <p class="subtitle">星光不问赶路人</p>
+        
+      </div>
+      <nav class="site-nav" id="site_nav">
+        <ul id="nav_ul">
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/" target="_self">
+                  <i class="fa fa-globe"></i> 首页
+                </a>
+              
+            </li>
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/archives" target="_self">
+                  <i class="fa fa-globe"></i> 归档
+                </a>
+              
+            </li>
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/tags" target="_self">
+                  <i class="fa fa-globe"></i> 标签
+                </a>
+              
+            </li>
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/post/about" target="_self">
+                  <i class="fa fa-globe"></i> 关于
+                </a>
+              
+            </li>
+          
+          
+          
+            <li id="fa_search" class="nav-item">
+              <a href="javascript:void(0);">
+                <i class="fa fa-search"></i> <span class="language" data-lan="search">搜索</span>
+              </a>
+            </li>
+          
+        </ul>
+      </nav>
+    </div>
+  </header>
+</div>
+
+<script type="text/javascript"> 
+ 
+  let showNav = true;
+
+  let navToggle = document.querySelector('#nav_toggle'),
+  siteNav = document.querySelector('#site_nav');
+  
+  function navClick() {
+    let sideBar = document.querySelector('.sidebar');
+    let navUl = document.querySelector('#nav_ul');
+    navToggle.classList.toggle('nav-toggle-active');
+    siteNav.classList.toggle('nav-menu-active');
+    if (siteNav.classList.contains('nav-menu-active')) {
+      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
+    } else {
+      siteNav.style = "";
+    }
+  }
+
+  navToggle.addEventListener('click',navClick);  
+</script>
+  </div>
+  <div class="main-continer">
+    
+    <div
+      class="section-layout  pisces">
+      <div class="section-layout-wrapper">
+        <div id="sidebarMeta" class="sidebar">
+    
+<div class="sidebar-wrapper box-shadow-wrapper bg-color">
+  <div class="sidebar-item">
+    <img class="site-author-image right-motion" src="/images/avatar.png"/>
+    <p class="site-author-name">清烟</p>
+    
+    <div class="site-description right-motion">
+      
+        <p id="binft">地上的菜鸡渴望飞翔</p>
+      
+    </div>
+    
+  </div>
+  <div class="sidebar-item side-item-stat right-motion">
+    <div class="sidebar-item-box">
+      <a href="/archives/">
+        
+        <span class="site-item-stat-count">7</span>
+        <span class="site-item-stat-name language" data-lan="article">文章</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="/tags/">
+        <span class="site-item-stat-count">4</span>
+        <span class="site-item-stat-name language" data-lan="tag">标签</span>
+      </a>
+    </div>
+  </div>
+  
+    
+  
+  
+
+  
+
+
+
+  <div style="width: 100%; position: relative;">
+    <canvas id="canvasDiyBlock" style="width:100%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+    <script src="/media/js/magic/clock.js"></script>
+  </div>
+
+</div>
+</div>
+<script>
+  let sidebarMeta = document.querySelector('#sidebarMeta');
+  let scheme = 'pisces';
+  let sidebarWrapper = document.querySelector('.sidebar-wrapper');
+  if (sidebarMeta && (scheme === 'pisces' || scheme === 'gemini')) {
+    document.addEventListener('scroll', function(e) {
+      if (document.scrollingElement.scrollTop > parseInt(sidebarMeta.style.marginTop) + 10) {
+        sidebarWrapper.classList.add('home-sidebar-fixed')
+      } else {
+        sidebarWrapper.classList.remove('home-sidebar-fixed')
+      }
+    });
+  }
+  </script>
+        <div class="section-box tag-line box-shadow-wrapper">
+          <section class="section tags-section posts-expand bg-color">
+            <div class="padding-wrapper">
+  <div class="tag-timeline-box">
+    <div class="tag-timeline-wrapper">
+      <div class="tag-timeline-title">
+        <h2>
+          java
+          <small class="language" data-lan="tag">标签</small>
+        </h2>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qingyandream.github.io/post/shi-me-shi-dan-li/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              04-09
+              <small>什么是单例？</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qingyandream.github.io/post/algorithm-java-01/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              03-27
+              <small> LeetCode 485. 最大连续 1 的个数</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <div class="footer-box">
+  <footer class="footer">
+    <center id="runTimeBox">
+      已运行:<span id="run_time"></span>
+    </center>
+    <span id="busuanzi_container_site_pv">浏览数:<span id="busuanzi_value_site_pv"></span> 次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">访客数:<span id="busuanzi_value_site_uv"></span> 人</span>
+
+    <script>
+      BirthDay = new Date('');
+      if (BirthDay.getTime()) {
+        function runTime() {
+          str = "";
+          today = new Date();
+          timeold = today.getTime() - BirthDay.getTime();
+          msPerDay = 24 * 60 * 60 * 1000;
+          e_daysold = timeold / msPerDay;
+          daysold = Math.floor(e_daysold);
+          str += daysold + "天";
+          return str;
+        }
+        setInterval(function () {
+          $("#run_time").html(runTime());
+        }, 1000);
+      } else {
+        document.querySelector('.footer').removeChild(document.querySelector('#runTimeBox'));
+      }
+    </script>
+    <div class="poweredby">
+      不见倾颜的清烟
+    </div>
+  </footer>
+  
+    
+        <div class="pisces back-to-top" id="back_to_top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span class="scrollpercent"> <span id="back_to_top_text">0</span>% </span>
+            
+        </div>
+        
+                  
+                        
+</div>
+<script>
+  let sideBarOpen = "sidebar-open";
+  let body = document.body;
+  let back2Top = document.querySelector("#back_to_top"),
+    back2TopText = document.querySelector("#back_to_top_text"),
+    drawerBox = document.querySelector("#drawer_box"),
+    rightSideBar = document.querySelector(".sidebar"),
+    viewport = document.querySelector("body");
+
+  function scrollAnimation(currentY, targetY) {
+    let needScrollTop = targetY - currentY;
+    let _currentY = currentY;
+    setTimeout(() => {
+      const dist = Math.ceil(needScrollTop / 10);
+      _currentY += dist;
+      window.scrollTo(_currentY, currentY);
+      if (needScrollTop > 10 || needScrollTop < -10) {
+        scrollAnimation(_currentY, targetY);
+      } else {
+        window.scrollTo(_currentY, targetY);
+      }
+    }, 1);
+  }
+
+  back2Top.addEventListener("click", function (e) {
+    scrollAnimation(document.scrollingElement.scrollTop, 0);
+    e.stopPropagation();
+    return false;
+  });
+
+  window.addEventListener("scroll", function (e) {
+    let percent =
+      (document.scrollingElement.scrollTop /
+        (document.scrollingElement.scrollHeight -
+          document.scrollingElement.clientHeight)) *
+      100;
+    if (percent > 1 && !back2Top.classList.contains("back-top-active")) {
+      back2Top.classList.add("back-top-active");
+    }
+    if (percent == 0) {
+      back2Top.classList.remove("back-top-active");
+    }
+    if (back2TopText) {
+      back2TopText.textContent = Math.floor(percent);
+    }
+  });
+
+  let hasCacu = false;
+  window.addEventListener("resize", function (e) {
+    calcuHeight();
+  });
+
+  function calcuHeight() {
+    // 动态调整站点概览高度
+    if (
+      (!hasCacu && back2Top.classList.contains("pisces")) ||
+      back2Top.classList.contains("gemini")
+    ) {
+      let sideBar = document.querySelector(".sidebar");
+      let navUl = document.querySelector("#site_nav");
+      sideBar.style =
+        "margin-top:" + (navUl.offsetHeight + navUl.offsetTop + 15) + "px;";
+      hasCacu = true;
+    }
+  }
+  calcuHeight();
+
+  let open = false,
+    MOTION_TIME = 300,
+    RIGHT_MOVE_DIS = "320px";
+
+  if (drawerBox) {
+    let rightMotions = document.querySelectorAll(".right-motion");
+    let right = drawerBox.classList.contains("right");
+
+    let transitionDir = right
+      ? "transition.slideRightIn"
+      : "transition.slideLeftIn";
+
+    let openProp, closeProp;
+    if (right) {
+      openProp = {
+        paddingRight: RIGHT_MOVE_DIS,
+      };
+      closeProp = {
+        paddingRight: "0px",
+      };
+    } else {
+      openProp = {
+        paddingLeft: RIGHT_MOVE_DIS,
+      };
+      closeProp = {
+        paddingLeft: "0px",
+      };
+    }
+
+    drawerBox.onclick = function () {
+      open = !open;
+      jQuery.Velocity(rightSideBar, "stop");
+      jQuery.Velocity(viewport, "stop");
+      jQuery.Velocity(rightMotions, "stop");
+      if (open) {
+        jQuery.Velocity(
+          rightSideBar,
+          {
+            width: RIGHT_MOVE_DIS,
+          },
+          {
+            duration: MOTION_TIME,
+            begin: function () {
+              jQuery.Velocity(rightMotions, transitionDir, {});
+            },
+          }
+        );
+        jQuery.Velocity(viewport, openProp, {
+          duration: MOTION_TIME,
+        });
+      } else {
+        jQuery.Velocity(
+          rightSideBar,
+          {
+            width: "0px",
+          },
+          {
+            duration: MOTION_TIME,
+            begin: function () {
+              jQuery.Velocity(rightMotions, {
+                opacity: 0,
+              });
+            },
+          }
+        );
+        jQuery.Velocity(viewport, closeProp, {
+          duration: MOTION_TIME,
+        });
+      }
+      for (let i = 0; i < drawerBox.children.length; i++) {
+        drawerBox.children[i].classList.toggle("muse-line");
+      }
+      drawerBox.classList.toggle(sideBarOpen);
+    };
+  }
+
+  // 链接跳转
+  let newWindow = "false";
+  if (newWindow === "true") {
+    let links = document.querySelectorAll(".post-body a");
+    links.forEach((item) => {
+      if (!item.classList.contains("btn")) {
+        item.setAttribute("target", "_blank");
+      }
+    });
+  }
+
+  let faSearch = document.querySelector("#fa_search");
+  faSearch &&
+    faSearch.addEventListener("click", function () {
+      document.querySelector("#search_mask").style = "";
+    });
+
+  // 代码高亮
+  hljs.initHighlightingOnLoad();
+
+  // 离开当前页title变化
+  var leaveTitle = "";
+  var normal_title = document.title;
+  if (leaveTitle) {
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState == "hidden") {
+        normal_title = document.title;
+        document.title = leaveTitle;
+      } else {
+        document.title = normal_title;
+      }
+    });
+  }
+</script>
+
+<link rel="stylesheet" href="/media/css/jquery.fancybox.css" />
+<script src="/media/js/jquery.fancybox.js"></script>
+
+<script>
+  let images = document.querySelectorAll(".section img");
+  images.forEach((image) => {
+    var parent = image.parentElement;
+    var next = image.nextElementSibling;
+    parent.removeChild(image);
+    var aelem = document.createElement("a");
+    aelem.href = image.src;
+    aelem.dataset["fancybox"] = "images";
+    aelem.dataset["rel"] = "fancybox-button";
+    aelem.classList.add("fancybox");
+    aelem.appendChild(image);
+    parent.insertBefore(aelem, next);
+  });
+</script>
+  </div>
+</body>
+
+  <div class="search-mask" id="search_mask" style="display: none;">
+  <div class="search-box">
+    <div class="search-title">
+      <i class="fa fa-search"></i>
+      <div class="input-box">
+        <input id="search" type="text" class="language" data-lan="search" placeholder="搜索">
+      </div>
+      <i id="close" class="fa fa-times-circle"></i>
+    </div>
+    <div class="stat-box">
+      <span id="stat_count">0</span><span class="language" data-lan="stat">条相关条目，使用了</span><span id="stat_times">0</span><span class="language" data-lan="stat-time">毫秒</span>
+      <hr>
+    </div>
+    <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://qingyandream.github.io/post/rabbitmq-de-gao-ke-yong-ji-zhi/"" data-c="
+          &lt;p&gt;在生产环境下，使用集群来保证高可用性&lt;br&gt;
+有普通集群、镜像集群、仲裁队列&lt;/p&gt;
+&lt;h4 id=&#34;普通集群&#34;&gt;普通集群&lt;/h4&gt;
+&lt;p&gt;普通集群又叫标准集群，有以下特征：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;会在集群的各个节点间共享部分数据，包括：交换机、队列元信息。不包含队列中的消息。&lt;/li&gt;
+&lt;li&gt;当访问集群某节点时，如果队列不在该节点，会从数据所在节点传递到当前节点并返回&lt;/li&gt;
+&lt;li&gt;队列所在节点宕机，队列中的消息就会丢失（缺点）&lt;br&gt;
+&lt;img src=&#34;https://qingyandream.github.io/post-images/1713085148141.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+这个交换机在每个集群当中，但是每个节点上的队列是不一样的。&lt;br&gt;
+消费者想要去消费 queue1中的消息，但是找的是第三个集群，第三个集群对 queue1进行了引用，所以会去传递到 queue1中去消费消息。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;镜像集群&#34;&gt;镜像集群&lt;/h4&gt;
+&lt;p&gt;镜像集群：本质是主从模式，具备下面的特征：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;交换机、队列、队列中的消息会在各个 mq 的镜像节点之间同步备份。&lt;/li&gt;
+&lt;li&gt;创建队列的节点被称为该队列的主节点，备份到的其它节点叫做该队列的镜像节点。&lt;/li&gt;
+&lt;li&gt;一个队列的主节点可能是另一个队列的镜像节点&lt;/li&gt;
+&lt;li&gt;所有操作都是主节点完成，然后同步给镜像节点&lt;/li&gt;
+&lt;li&gt;主节点宕机后，镜像节点会替代成新的主节点&lt;br&gt;
+如果主节点宕机，数据没有同步完成，就有可能丢失数据。（少见）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;仲裁队列&#34;&gt;仲裁队列&lt;/h4&gt;
+&lt;p&gt;用来替代镜像队列，具备以下特征：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;与镜像队列一样，都是主从模式，支持主从数据同步&lt;/li&gt;
+&lt;li&gt;使用非常简单，没有复杂的配置&lt;/li&gt;
+&lt;li&gt;主从同步基于 Raft 协议，强一致&lt;br&gt;
+开启方法如下：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;  // 使用@Bean注解定义一个Queue的Bean，Spring会自动将其注册到应用上下文中
+    @Bean
+    public Queue quorum() {
+        // 使用QueueBuilder创建一个队列构建器
+        // nonDurable(&amp;quot;test.quorum&amp;quot;)指定队列名称为&amp;quot;test.quorum&amp;quot;，并且是非持久化的
+        return QueueBuilder.nonDurable(&amp;quot;test.quorum&amp;quot;)
+                // quorum()方法指定这个队列是一个Quorum队列
+                .quorum()
+                // exclusive()方法指定这个队列是独占的，仅对声明它的连接可见
+                .exclusive()
+                // build()方法完成队列构建
+                .build();
+    }
+&lt;/code&gt;&lt;/pre&gt;
+">RabbitMQ的高可用机制</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://qingyandream.github.io/post/xiao-xi-dui-ji/"" data-c="
+          &lt;p&gt;当生产者发送消息的速度超过了消费者处理消息的速度，就会导致队列中的消息堆积，直至队列储存消息达到上限。之后发送的消息就会称为死信，可能会被丢弃，这就是消息堆积问题。&lt;br&gt;
+解决方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;增加更多消费者，提高消费速度&lt;/li&gt;
+&lt;li&gt;在消费者内开启线程池加快消息处理速度&lt;/li&gt;
+&lt;li&gt;扩大队列容积，提高堆积上限，采用惰性队列&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;惰性队列&#34;&gt;惰性队列&lt;/h4&gt;
+&lt;p&gt;惰性队列特征如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;接到消息后直接存入磁盘而非内存&lt;/li&gt;
+&lt;li&gt;消费者要消费消息时才会从磁盘中读取并加载到内存&lt;/li&gt;
+&lt;li&gt;支持数百万条的消息储存&lt;br&gt;
+下面是通过配置来开启惰性队列：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;// 使用Spring AMQP的QueueBuilder来声明一个惰性队列
+@Bean
+public Queue lazyQueue(){
+    // 创建一个持久化、名为&amp;quot;lazy.queue&amp;quot;的队列，并设置为惰性模式
+    return QueueBuilder.durable(&amp;quot;lazy.queue&amp;quot;)
+            .lazy() // 开启惰性模式
+            .build();
+}
+
+// 声明一个直连交换机，用于惰性队列消息的转发
+@Bean
+public DirectExchange lazyDirectExchange(){
+    // 创建一个名为&amp;quot;lazy.exchange&amp;quot;的直连交换机
+    return new DirectExchange(&amp;quot;lazy.exchange&amp;quot;);
+}
+
+// 将惰性队列和惰性交换机绑定，并指定路由键
+@Bean
+public Binding lazyBinding(Queue lazyQueue, DirectExchange lazyDirectExchange){
+    // 使用BindingBuilder将名为&amp;quot;lazy.queue&amp;quot;的队列绑定到名为&amp;quot;lazy.exchange&amp;quot;的交换机
+    // 并使用&amp;quot;lazy&amp;quot;作为路由键
+    return BindingBuilder.bind(lazyQueue).to(lazyDirectExchange).with(&amp;quot;lazy&amp;quot;);
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;下面是注解方式，设置属性 x-queue-mode 为lazy：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    // 使用@RabbitListener注解声明一个惰性队列、交换机和绑定
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(name = &amp;quot;lazy.queue&amp;quot;, durable = &amp;quot;true&amp;quot;, arguments = @Argument(name = &amp;quot;x-queue-mode&amp;quot;, value = &amp;quot;lazy&amp;quot;)),
+            exchange = @Exchange(name = &amp;quot;lazy.exchange&amp;quot;, type = ExchangeTypes.DIRECT),
+            key = &amp;quot;lazy.routing.key&amp;quot;
+    ))
+      public void receiveMessage(String message) {
+        // 处理接收到的消息
+    }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;优点：基于磁盘储存，消息上限高，性能比较稳定。&lt;br&gt;
+缺点：受限于磁盘 IO，时效性会降低。（在数据处理过程中，由于磁盘输入/输出（IO）操作的效率限制，导致数据处理的时效性下降。这里的&amp;quot;时效性&amp;quot;指的是完成任务或处理数据所需的时间。）&lt;/p&gt;
+">消息堆积</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://qingyandream.github.io/post/rabbitmq-zhong-si-xin-jiao-huan-ji/"" data-c="
+          &lt;p&gt;当一个队列中的消息满足下列情况之一时，可以成为死信：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;消费者使用 basic（/ ˈbeɪ.sɪk /）. reject （ /rɪˈdʒekt/）或 basic. nack 声明消费失败，并且消息的 requeue 参数为 false&lt;/li&gt;
+&lt;li&gt;消息是一个过期消息，超时无人消费&lt;/li&gt;
+&lt;li&gt;要投递的队列消息堆积满了，最早的消息可能成为死信&lt;br&gt;
+如果该队列配置了 dead-letter-exchange 属性，指定了一个交换机，那么队列中的死信就会投递到这个交换机中，而这个交换机称为死信交换机。&lt;br&gt;
+&lt;img src=&#34;https://qingyandream.github.io/post-images/1713063648750.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+要对下面进行配置&lt;br&gt;
+dead-letter-exchange=dl. direct&lt;br&gt;
+dead-letter-routing-key=dl&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Bean
+public Queue simpleQueue2(){
+    return QueueBuilder.durable(&amp;quot;xxxx.queue&amp;quot;) // 指定队列名称，并持久化
+        .deadLetterExchange(&amp;quot;dl.direct&amp;quot;) // 指定死信交换机
+        .build();
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;ttl&#34;&gt;TTL&lt;/h4&gt;
+&lt;p&gt;TTL: Time-To-Live（存活时间）, 如果一个队列中的消息 TTL 结束仍未消费，则会变为死信，ttl 超时分为两种情况：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;消息所在的队列设置了存活时间&lt;/li&gt;
+&lt;li&gt;消息本身设置了存活时间&lt;br&gt;
+&lt;img src=&#34;https://qingyandream.github.io/post-images/1713063685453.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Bean
+public Queue ttlQueue(){
+    return QueueBuilder.durable(&amp;quot;ttl.queue&amp;quot;) // 指定队列名称，并持久化
+        .ttl(5000) // 设置队列的超时时间，5秒
+        .deadLetterExchange(&amp;quot;dl.direct&amp;quot;) // 指定死信交换机
+        .build();
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;延迟队列&#34;&gt;延迟队列&lt;/h4&gt;
+&lt;p&gt;延迟队列=死信交换机+TTL&lt;br&gt;
+使用延迟队列要安装一个 DelayExchange 插件，需要安装在 RabbitMQ 中。&lt;br&gt;
+DelayExchange 的本质还是官方的三种交换机，只是添加了延迟功能。所以在使用的时候只需要声明一个交换机，交换机的类型可以是任意类型，然后设定 delayed 属性为 true 即可。&lt;br&gt;
+首先去声明一个交换机，通过@RabbitListener 注解绑定交换机并且设定 delayed 属性为 true 即可。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@RabbitListener(bindings = @QueueBinding(value = @Queue(name = &amp;quot;queue_delay&amp;quot;),
+            exchange = @Exchange(name = &amp;quot;exchange_delay&amp;quot;, delayed = &amp;quot;true&amp;quot;), key = &amp;quot;routing_delay&amp;quot;))
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;发送消息：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;Message message = MessageBuilder.withBody(msg.getBytes(StandardCharsets.UTF_8)).setHeader(&amp;quot;x-delay&amp;quot;, 5000).build();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;通过配置的方式来实现：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
+@Configuration
+public class RabbitMQConfig {
+
+    // 声明延迟队列
+    @Bean
+    public Queue delayQueue() {
+        // 创建一个持久化的队列，队列名称为 &amp;quot;delay.queue&amp;quot;，并且设置为持久化队列
+        return new Queue(&amp;quot;delay.queue&amp;quot;, true);
+    }
+
+    // 声明延迟交换机
+    @Bean
+    public CustomExchange delayExchange() {
+        // 创建一个自定义的延迟交换机，交换机名称为 &amp;quot;delay.exchange&amp;quot;，类型为 &amp;quot;x-delayed-message&amp;quot;
+        // 并且设置为持久化交换机，非自动删除，以及自定义的参数
+        Map&amp;lt;String, Object&amp;gt; args = new HashMap&amp;lt;&amp;gt;();
+        args.put(&amp;quot;x-delayed-type&amp;quot;, &amp;quot;direct&amp;quot;); // 设置延迟消息的类型为 direct
+        // 创建一个自定义的延迟交换机
+		// 参数说明：
+		// name: 交换机的名称，这里设置为 &amp;quot;delay.exchange&amp;quot;
+		// type: 交换机的类型，这里设置为 &amp;quot;x-delayed-message&amp;quot;，表示这是一个延迟交换机
+		// durable: 设置为 true，表示交换机是持久化的，即使RabbitMQ重启，交换机也会保留
+		// autoDelete: 设置为 false，表示交换机不会在没有队列绑定时自动删除
+		// arguments: 一个包含额外参数的Map，用于配置交换机的行为
+		// 这里设置了 &amp;quot;x-delayed-type&amp;quot; 参数，其值为 &amp;quot;direct&amp;quot;，表示消息将根据路由键直接路由到队列
+        return new CustomExchange(&amp;quot;delay.exchange&amp;quot;, &amp;quot;x-delayed-message&amp;quot;, true, false, args);
+    }
+
+    // 声明延迟队列和延迟交换机的绑定
+    @Bean
+    public Binding delayBinding(Queue delayQueue, CustomExchange delayExchange) {
+        // 创建一个绑定，将延迟队列和延迟交换机绑定在一起
+        // 使用 &amp;quot;delay.routing.key&amp;quot; 作为路由键
+        return BindingBuilder.bind(delayQueue).to(delayExchange).with(&amp;quot;delay.routing.key&amp;quot;).noargs();
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+">RabbitMQ中死信交换机</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://qingyandream.github.io/post/rabbitmq-xiao-xi-de-chong-fu-xiao-fei/"" data-c="
+          &lt;p&gt;造成重复消费问题大约有以下原因：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;网络抖动&lt;/li&gt;
+&lt;li&gt;服务宕机&lt;br&gt;
+解决方法：&lt;/li&gt;
+&lt;li&gt;每条消息设置一个唯一的标识 id&lt;/li&gt;
+&lt;li&gt;幂等方案：分布式锁、数据库锁（悲观锁、乐观锁）&lt;/li&gt;
+&lt;/ul&gt;
+">RabbitMQ消息的重复消费</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://qingyandream.github.io/post/rabbitmq-ru-he-bao-zheng-xiao-xi-bu-diu-shi/"" data-c="
+          &lt;p&gt;消息丢失的情况大约有三种：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;消息未达到交换机&lt;/li&gt;
+&lt;li&gt;消息未达到队列&lt;/li&gt;
+&lt;li&gt;消费者未接收到消息&lt;br&gt;
+&lt;img src=&#34;https://qingyandream.github.io/post-images/1712923082942.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;生产者确认机制&#34;&gt;生产者确认机制&lt;/h4&gt;
+&lt;p&gt;RabbitMQ 提供了 publisher confirm 机制来避免消息发送到 MQ 过程中丢失。&lt;br&gt;
+消息发送到 MQ 以后，会返回一个结果给发送者，表示消息处理成功。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;消息未达到交换机，会返回一个 nack publish-confirm&lt;/li&gt;
+&lt;li&gt;消息未达到队列，返回一个 ack publish-return&lt;/li&gt;
+&lt;li&gt;消费者未接收到消息，ask public-confirm&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;处理方法&#34;&gt;处理方法：&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;回调方法即时重发&lt;/li&gt;
+&lt;li&gt;记录日志&lt;/li&gt;
+&lt;li&gt;保存到数据库，然后定时重发，成功发送后立即删除表中数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;mq-宕机了怎么办&#34;&gt;MQ 宕机了怎么办？&lt;/h4&gt;
+&lt;p&gt;开启持久化功能可以确保缓存在 MQ 中的消息不丢失&lt;br&gt;
+解决方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;交换机持久化&lt;/li&gt;
+&lt;li&gt;队列持久化&lt;/li&gt;
+&lt;li&gt;消息持久化&lt;br&gt;
+交换机持久化：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt; @Bean
+    public DirectExchange directExchange() {
+        // 第二个参数设置为true，表示交换机是持久化的
+        return new DirectExchange(&amp;quot;directExchange&amp;quot;, true, false);
+    }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;队列持久化：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
+    @Bean
+    public Queue queue() {
+        // 第二个参数设置为true，表示队列是持久化的
+        return new Queue(&amp;quot;persistent_queue&amp;quot;, true);
+    }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;消息持久化&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;  // 创建一个MessageProperties对象，并设置消息的持久化属性
+         MessageProperties messageProperties = new MessageProperties();
+         messageProperties.setDeliveryMode(MessageDeliveryMode.PERSISTENT );
+         // 创建一个Message对象，并设置消息的内容和持久化属性
+         Message persistentMessage = new Message(message.getBytes(), messageProperties);
+         // 使用RabbitTemplate发送持久化消息
+         rabbitTemplate.convertAndSend(&amp;quot;exchangeName&amp;quot;, &amp;quot;routingKey&amp;quot;, persistentMessage);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;消费者消息丢失消费者未接收到消息&#34;&gt;消费者消息丢失（消费者未接收到消息）&lt;/h4&gt;
+&lt;p&gt;RabbitMQ 支持消费者确认机制。&lt;br&gt;
+消费者处理消息后可以向 MQ 发送 ack 回执，MQ 收到 ack 回执后才会删除该消息。&lt;br&gt;
+三种模式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;manual：手动 ack，需要在业务代码结束后，调用 api 发送 ack&lt;/li&gt;
+&lt;li&gt;auto：自动 ack，由 spring 监测 listener 代码是否出现异常（一般使用这种）&lt;/li&gt;
+&lt;li&gt;none：关闭 ack，MQ 假定消费者获取消息后成功处理，因此消息投递后立即删除&lt;br&gt;
+使用 Spring 中的 retry 机制，在消费者出现异常时利用本地重试次数，当次数达到了以后，如果消息依然失败，将消息投递到异常交换机，交由人工处理。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;总结&#34;&gt;总结&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;开启生产者确认机制&lt;/li&gt;
+&lt;li&gt;开启持久化功能&lt;/li&gt;
+&lt;li&gt;开启消费者确认机制为 auto&lt;/li&gt;
+&lt;li&gt;开启消费者失败重试机制&lt;/li&gt;
+&lt;/ul&gt;
+">RabbitMQ如何保证消息不丢失</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://qingyandream.github.io/post/shi-me-shi-dan-li/"" data-c="
+          &lt;p&gt;在 Java 中，单例（Singleton）是一种设计模式，它确保类只有一个实例，并提供一个全局访问点。&lt;br&gt;
+实现关键：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;私有构造方法：其他类无法直接实例化该类。&lt;/li&gt;
+&lt;li&gt;私有静态变量：保存该类的唯一实例。&lt;/li&gt;
+&lt;li&gt;公有静态方法：获取该类的唯一实例。&lt;br&gt;
+下面是一个简单的懒汉单例模式，代码如下：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class Singleton {
+    // 私有静态变量，保存唯一实例
+    private static Singleton instance;
+    // 私有构造方法，防止外部直接实例化
+    private Singleton() {}
+    // 公有静态方法，获取唯一实例
+    public static Singleton getInstance() {
+        // 如果实例不存在，则创建一个新实例
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        // 返回唯一实例
+        return instance;
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;使用 Singleton.getInstance()可以进行调用，懒汉式单例模式，在多线程环境下，可能会存在线程安全问题，下面提供一个解决方法（私有静态类）：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class Singleton {
+    private Singleton() {}
+    private static class SingletonHolder {
+        private static final Singleton instance = new Singleton();
+    }
+    public static Singleton getInstance() {
+        return SingletonHolder.instance;
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;私有的静态内部类 SingletonHolder 持有唯一的实例，并在静态初始化阶段完成实例化。由于静态内部类只有在被引用时才会加载，因此可以延迟实例的创建，从而实现懒汉式的单例。&lt;br&gt;
+饿汉模式（Eager Initialization）是一种单例模式的实现方式，在类加载的时候就创建并初始化单例对象，保证在多线程环境下也能保持单例的唯一性。&lt;br&gt;
+例子如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class Singleton {
+    // 在类加载的时候就创建并初始化单例对象
+    private static final Singleton INSTANCE = new Singleton();
+    // 私有构造方法，防止外部实例化
+    private Singleton() {
+    }
+    // 公有静态方法，供外部获取单例对象
+    public static Singleton getInstance() {
+        return INSTANCE;
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Singleton类的静态成员变量INSTANCE在类加载的时候就会被创建并初始化，因此可以保证在整个程序运行期间只存在一个Singleton对象。&lt;br&gt;
+另外，枚举类型的实例是唯一的，而且在任何情况下都是线程安全的。使用枚举来实现单例模式是最简洁、安全的方式。&lt;/p&gt;
+">什么是单例？</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://qingyandream.github.io/post/algorithm-java-01/"" data-c="
+          &lt;p&gt;给定一个二进制数组 nums ， 计算其中最大连续 1 的个数。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;示例 1：
+
+输入：nums = [1,1,0,1,1,1]
+输出：3
+解释：开头的两位和最后的三位都是连续 1 ，所以最大连续 1 的个数是 3.
+示例 2:
+
+输入：nums = [1,0,1,1,0,1]
+输出：2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;根据题目可以知道，我们要求的是最大连续 1 的个数，所以要对数组进行遍历，我们定义两个参数用来记录连续个数，为什么要设置两个呢？因为，当我们遍历数组，我们是不是要把之前的连续是1的个数记录下来？是的，我们可以用temp用来记录之前连续1的个数，当我们遍历到0的时候我们做一个比较，比较一下temp和coiled二者谁比较大 ，把大的值赋给coiled，在把temp重置为0；最后返回的也要做一个比较，防止数组末尾是1。&lt;/p&gt;
+&lt;p&gt;解题代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;class Solution {
+    public int findMaxConsecutiveOnes(int[] nums) {
+    int coiled=0;
+    int temp=0;
+    for(int x:nums){
+        if(x==1){
+            temp++;
+        }
+        if(x==0){
+           coiled=Math.max(temp,coiled);
+           temp=0;
+        }
+    }
+    //确保最后一次遍历正确
+    return Math.max(coiled,temp);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+"> LeetCode 485. 最大连续 1 的个数</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://qingyandream.github.io/post/about/"" data-c="
+          &lt;blockquote&gt;
+&lt;p&gt;欢迎来到我的小站呀，很高兴遇见你！🤝&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;关于本站&#34;&gt;🏠 关于本站&lt;/h2&gt;
+&lt;h2 id=&#34;博主是谁&#34;&gt;👨‍💻 博主是谁&lt;/h2&gt;
+&lt;h2 id=&#34;兴趣爱好&#34;&gt;⛹ 兴趣爱好&lt;/h2&gt;
+&lt;h2 id=&#34;联系我呀&#34;&gt;📬 联系我呀&lt;/h2&gt;
+">关于</a>
+      </div>
+      
+    </div>
+    <div class="page">
+      <div id="page_ul"></div>
+    </div>
+  </div>
+</div>
+<script>
+  !function () {
+    let searchMask = document.querySelector('#search_mask');
+    let result = document.querySelector('#result');
+    let items = document.querySelectorAll('.item');
+    let searchBox = document.querySelector('#search');
+    let statCount = document.querySelector('#stat_count');
+    let statTimes = document.querySelector('#stat_times');
+    let pageUl = document.querySelector('#page_ul');
+    let close = document.querySelector('#close');
+    
+    close.addEventListener('click', function() {
+      searchMask.style = 'display: none;'
+    })
+
+    let finds = [];
+    let contents = [];
+    let pageSize = 10;
+    items.forEach(item => {
+      let a = item.querySelector('a');
+      contents.push({
+        title: a.innerText,
+        details: a.dataset.c,
+        link: a.href
+      })
+      item.remove();
+    })
+
+    function insertStr(soure, start, count) {
+      let newStr = soure.substr(start, count);
+      return soure.slice(0, start) + '<em>' + newStr + '</em>' + soure.slice(start + count);
+    }
+
+    pageUl.addEventListener('click', function(event) {
+      let target = event.target;
+      if (target.__proto__ === HTMLSpanElement.prototype) {
+        appendResults(parseInt(target.dataset.i));
+      }
+    })
+
+    function appendResults(index) {
+      let htmlResult = '';
+      let start = index || 0;
+      let end = Math.min(start + pageSize, finds.length);
+      for (let i = start; i < end; i++) {
+        const current = finds[i];
+        let html = current.title;
+        let sum = 0;
+        let positions = current.positions;
+        positions.forEach(position => {
+          html = insertStr(html, position.start + sum, position.count);
+          sum += 9;
+        })
+        htmlResult += `<div class="item"><a class="result-title" href="${current.link}">${html}</a></div>`;
+      }
+      result.innerHTML = htmlResult;
+      pageUl.innerHTML = '';
+      let count = finds.length / pageSize;
+      let lis = '';
+      if (start !== 0) {
+        lis += `<span class="fa fa-angle-left" data-i='${start - 1}'></span>`;
+      }
+      for (let i = 0; i < count; i++) {
+        lis += `<span class='${i === start?'current':''}' data-i='${i}'>${i+1}</span>`;     
+      }
+      if (start+1 < count) {
+        lis += `<span class="fa fa-angle-right" data-i='${start+1}'></span>`;  
+      }
+      pageUl.innerHTML = lis;
+    }
+
+    function search(delay) {
+      let timer = null
+      return function () {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          let start = Date.now();
+          let segments = searchBox.value.split(' ').filter(c => c != '');
+          if (segments.length <= 0) {
+            return;
+          }
+          finds = [];
+          let htmlResult = '';
+          contents.forEach(content => {
+            let title = content.title;
+            let positions = [];
+            let find = false;
+            segments.forEach((segment) => {
+              if (content.title.includes(segment)) {
+                find = true;
+                positions.push({
+                  start: content.title.indexOf(segment),
+                  count: segment.length
+                })
+              } else if (content.details.includes(segment)) {
+                find = true;
+              }
+            });
+            if (find) {
+              finds.push({
+                title: content.title,
+                link: content.link,
+                positions
+              });
+            }
+          })
+          appendResults(0);
+          statCount.textContent = finds.length;
+          statTimes.textContent = Date.now() - start;
+        }, delay)
+      }
+    }
+    searchBox.addEventListener('input', search(200));
+  }()
+</script>
+
+<input hidden id="copy" />
+<script>
+  !function () {
+    let times = document.querySelectorAll('.publish-time');
+    for (let i = 0; i < times.length; i++) {
+      let date = times[i].dataset.t;
+      let time = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
+      if (time < 60) {
+        str = time + '秒之前';
+      } else if (time < 3600) {
+        str = Math.floor(time / 60) + '分钟之前';
+      } else if (time >= 3600 && time < 86400) {
+        str = Math.floor(time / 3600) + '小时之前';
+      } else if (time >= 86400 && time < 259200) {
+        str = Math.floor(time / 86400) + '天之前';
+      } else {
+        str = times[i].textContent;
+      }
+      times[i].textContent = str;
+    }
+  }();
+</script>
+
+<script>
+  let language = '';
+  if (language !== '') {
+    let map = new Map();
+    if (language === 'en') {
+      map.set('search', 'Search');
+      map.set('category', 'Categories');
+      map.set('article', 'Articles');
+      map.set('tag', 'Tags');
+      map.set('top', 'Top');
+      map.set('publish', 'published');
+      map.set('minute', ' minutes');
+      map.set('read-more', 'Read More');
+      map.set('view', 'View');
+      map.set('words', ' words');
+      map.set('category-in', 'category in');
+      map.set('preview', 'Meta');
+      map.set('index', 'Toc');
+      map.set('no-archives', "You haven't created yet");
+      map.set('archives', " articles in total");
+      map.set('cloud-tags', " tags in total");
+      map.set('copyright', "Copyright: ");
+      map.set('author', "Author: ");
+      map.set('link', "Link: ");
+      map.set('leave-message', "Leave a message");
+      map.set('format', "Links Format");
+      map.set('site-name', "Name: ");
+      map.set('site-link', "Link: ");
+      map.set('site-desc', "Desc: ");
+      map.set('stat', " related results, taking ");
+      map.set('stat-time', " ms");
+      map.set('site-img', "Image: ");
+    }
+
+    if (map.size > 0) {
+      let lanElems = document.querySelectorAll('.language');
+      lanElems.forEach(elem => {
+        let lan = elem.dataset.lan, text = map.get(lan);
+        if (elem.__proto__ === HTMLInputElement.prototype) {
+          elem.placeholder = text
+        } else {
+          if (elem.dataset.count) {
+            text = elem.dataset.count + text;
+          }
+          elem.textContent = text;
+        }
+      })
+    }
+  }
+
+  window.Clipboard = (function (window, document, navigator) {
+    var textArea,
+      copy;
+
+    // 判断是不是ios端
+    function isOS() {
+      return navigator.userAgent.match(/ipad|iphone/i);
+    }
+    //创建文本元素
+    function createTextArea(text) {
+      textArea = document.createElement('textArea');
+      textArea.value = text;
+      textArea.style.width = 0;
+      textArea.style.height = 0;
+      textArea.clientHeight = 0;
+      textArea.clientWidth = 0;
+      document.body.appendChild(textArea);
+    }
+    //选择内容
+    function selectText() {
+      var range,
+        selection;
+
+      if (isOS()) {
+        range = document.createRange();
+        range.selectNodeContents(textArea);
+        selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        textArea.setSelectionRange(0, 999999);
+      } else {
+        textArea.select();
+      }
+    }
+
+    //复制到剪贴板
+    function copyToClipboard() {
+      try {
+        document.execCommand("Copy")
+      } catch (err) {
+        alert("复制错误！请手动复制！")
+      }
+      document.body.removeChild(textArea);
+    }
+
+    copy = function (text) {
+      createTextArea(text);
+      selectText();
+      copyToClipboard();
+    };
+
+    return {
+      copy: copy
+    };
+  })(window, document, navigator);
+
+  function copyCode(e) {
+    if (e.srcElement.tagName === 'SPAN' && e.srcElement.classList.contains('copy-code')) {
+      let code = e.currentTarget.querySelector('code');
+      var text = code.innerText;
+      if (e.srcElement.textContent === '复制成功') {
+        return;
+      }
+      e.srcElement.textContent = '复制成功';
+      (function (elem) {
+        setTimeout(() => {
+          if (elem.textContent === '复制成功') {
+            elem.textContent = '复制代码'
+          }
+        }, 1000);
+      })(e.srcElement)
+      Clipboard.copy(text);
+    }
+  }
+
+  let pres = document.querySelectorAll('pre');
+  pres.forEach(pre => {
+    let code = pre.querySelector('code');
+    let copyElem = document.createElement('span');
+    copyElem.classList.add('copy-code');
+    copyElem.textContent = '复制代码';
+    pre.appendChild(copyElem);
+    pre.onclick = copyCode
+  })
+
+</script>
+<script src="/media/js/motion.js"></script>
+
+
+  <script
+    src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+  <script>
+    var scroll = new SmoothScroll('a[href*="#"]', {
+      speed: 200
+    });
+  </script>
+
+
+
+
+  <script src="/media/js/cool.js"></script>
+
+
+
+  <div class="snow-container"></div>
+  <script src="/media/js/bg/snow.js"></script>
+
+
+</html>
